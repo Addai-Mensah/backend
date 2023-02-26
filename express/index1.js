@@ -65,7 +65,7 @@ app.delete("/api/courses/:id", (req,res) =>{
 
     const index = courses.indexOf(course)
     courses.splice(index,1)
-    res.send(course)
+    res.send(courses)
 })
 
 
