@@ -1,8 +1,21 @@
 const Joi = require ("joi")
 const { json } = require("express");
 const express = require ("express");
+const config = require("config");
 const app = express();
 app.use(express.json())
+
+// console.log(`NODE_ENV: ${process.env.NODE_ENV}`)
+// console.log(`app: ${app.get("env")}`)
+
+// if (app.get("env") === "development"){
+//     app.use(morgan("tiny"));
+//     console.log("Morgan enabled...")
+// }
+
+
+console.log("Application Name:" + config.get("name"));
+console.log("Mail Server:" + config.get("mail.host"))
 
 const courses = [
     {id:1, name: "course1"},
@@ -11,6 +24,8 @@ const courses = [
     {id:4, name: "course4"},
 
 ]
+
+
 
 app.get("/", (req,res) =>{
     res.send("Hello world")
