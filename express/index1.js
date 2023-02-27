@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json())
 
 // console.log(`NODE_ENV: ${process.env.NODE_ENV}`)
-// console.log(`app: ${app.get("env")}`)
+console.log(`app: ${app.get("env")}`)
 
 // if (app.get("env") === "development"){
 //     app.use(morgan("tiny"));
@@ -85,9 +85,9 @@ app.delete("/api/courses/:id", (req,res) =>{
 
 
 
+const port = process.env.PORT||3000;
+app.listen(port,()=> console.log(`Listening on port ${port}....`))
 
-app.listen(3000,() => console.log(`Listening on port 3000...`))
-// const k  = process.env.PORT || 3000;
 
 
   function validateCourse (course) {
