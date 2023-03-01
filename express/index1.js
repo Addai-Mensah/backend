@@ -3,15 +3,17 @@ const { json } = require("express");
 const express = require ("express");
 const config = require("config");
 const app = express();
+const morgan = require ("morgan")
 app.use(express.json())
 
-// console.log(`NODE_ENV: ${process.env.NODE_ENV}`)
-console.log(`app: ${app.get("env")}`)
 
-// if (app.get("env") === "development"){
-//     app.use(morgan("tiny"));
-//     console.log("Morgan enabled...")
-// }
+// console.log(`NODE_ENV: ${process.env.NODE_ENV}`)
+// console.log(`app: ${app.get("env")}`)
+
+if (app.get("env") === "development"){
+    app.use(morgan("tiny"));
+    console.log("Morgan enabled...")
+}
 
 
 console.log("Application Name:" + config.get("name"));
