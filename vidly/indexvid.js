@@ -4,6 +4,11 @@ const express = require ("express");
 const app = express();
 app.use(express.json())
 
+
+const mongoose = require ("mongoose")
+mongoose.connect("mongodb://localhost/vidly")
+.then(() => console.log("connected to mongo db"))
+.catch (err => console.log("could not connect to mongodb"))
 const vidly=[
     {id:1, genres:"action"},
     {id:2, genres:"comedy"},
@@ -40,7 +45,7 @@ app.post("/api/vidly/", (req,res) =>{
   vidly.push(movie)
   res.send(movie)
 
-})
+})  
 
 
 app.put("/api/vidly/:genres",(req,res) =>{
