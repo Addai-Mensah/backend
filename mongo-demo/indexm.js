@@ -1,5 +1,5 @@
 const mongoose = require ("mongoose")
-mongoose.connect('mongodb://127.0.0.1:27017/?directConnection=true/playground')
+mongoose.connect('mongodb://127.0.0.1:27017/?directConnection=true')
 
 .then (() =>console.log('connected to MongoDB...'))
 .catch (() => console.error('could not connect to Mongodb'))
@@ -32,12 +32,12 @@ const courseSchema = new mongoose.Schema({
         required: function () {return this.isPublished}
     },
 
-    category:{
-       type:String,
+    category:{ 
+       type:String, 
        required:true,
-       enum:["web", "mobile","network"] 
+       enum:["web","mobile","network"]
     }
- })
+ })  
  
  //  models are used to compile schema
  const Course = mongoose.model('Course',courseSchema);
@@ -57,16 +57,16 @@ async function createCourse(){
 
 
     try{
-        const result = await course.save();
+        const result = await course.sa ve();
         console.log(result)
     }
+
+    
 
     catch(ex){ 
        for(field in ex.errors)
        console.log(ex.errors[field].message)
-    }
-    
-    
+    }  
 }
 // createCourse();
  
@@ -86,4 +86,43 @@ async function updateCourse(id){
             isPublished: false
         }
     },{New: true})
+}
+
+const courseScheme = new mongoose.Schema({
+    name:{
+        type: String,
+        minlength:5,
+        maxlength:18,
+        required:true,
+    },
+    author:{
+        type: String,
+        minlength:6,
+        required:true,
+
+    },
+
+    tags:{
+        type: Array,
+        enum:"frontend",
+        requred:true,
+    }
+})
+
+const Courses = mongoose.model("Course",courseScheme);
+
+async function createCourse() {
+    const course = await new Course({
+        name:"Mathematics",
+        author: "Kojo",
+        tags:["frontend","react","javascript"]
+    })
+   try{
+    const result = await course.save()
+   }
+
+   catch(ex){
+    for (field in ex.errors)
+    console.log(ex.errors.field[0].message)
+   }
 }

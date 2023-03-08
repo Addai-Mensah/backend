@@ -16,6 +16,7 @@ if (app.get("env") === "development"){
 }
 
 
+
 console.log("Application Name:" + config.get("name"));
 console.log("Mail Server:" + config.get("mail.host"))
 
@@ -85,6 +86,13 @@ app.delete("/api/courses/:id", (req,res) =>{
     res.send(course)
 })
 
+function validateCourse (course) {
+    const schema = {
+        name: Joi.string().min(3).required()
+    }
+    return Joi.validate(course,schema);
+ }
+
 
 
 const port = process.env.PORT||3000;
@@ -92,13 +100,7 @@ app.listen(port,()=> console.log(`Listening on port ${port}....`))
 
 
 
-  function validateCourse (course) {
-    const schema = {
-        name: Joi.string().min(3).required()
-    }
-    return Joi.validate(course,schema);
- }
-
+  
 
 
 
